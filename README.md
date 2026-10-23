@@ -30,8 +30,10 @@ The repository provides all scripts required to reproduce the numerical example 
 2. Execute ...
 3. Run ...
 
-%## Citation
+<!--
+## Citation
 
-%If you use this code in your research, please cite:
+If you use this code in your research, please cite:
 
-%F. A. Engeln, M. Zagórowska, and J.-W. van Wingerden, *Time-varying feedback optimization: Convergence bounds and stepsize selection*
+F. A. Engeln, M. Zagórowska, and J.-W. van Wingerden, *Time-varying feedback optimization: Convergence bounds and stepsize selection*
+--!>
