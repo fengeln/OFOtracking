@@ -22,7 +22,7 @@ This repository contains the code accompanying the paper:
 
 The repository provides all scripts required to reproduce the numerical example presented in the paper.
 <p align="center">
-  <img src="WindTurbines/figures/turbinesSetup.png" alt="Two-tank system" width="500">
+  <img src="WindTurbines/figures/turbinesSetup.png" alt="Two-tank system" width="800">
 </p>
 
 
