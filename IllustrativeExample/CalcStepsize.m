@@ -23,63 +23,45 @@ rho_star = max(abs(1 - eta_opt*lambda_max),abs(1 - eta_opt*lambda_min));
 r_star = deltamax/(1 - rho_star);
 %-------------------------------------------------------------
 %% Plot
+load('data/error1.mat')
+load('data/error2.mat')
+etavecshort = 0.01:0.01:1.0;
 figure(1);
 hold on
 box on
 grid on
-
 % Main curve
 plot(etavec, r,'LineWidth', 2, 'Color', colorvec(1,:));
 plot(etavec, J1./N, 'LineWidth', 2, 'Color', colorvec(2,:));
 plot(etavec, J2./N, 'LineWidth', 2, 'Color', colorvec(3,:));
+
+plot(etavecshort,totalerror2,'--','LineWidth', 2, 'Color', colorvec(2,:))
+plot(etavecshort,totalerror1,'--','LineWidth', 2, 'Color', colorvec(3,:))
 % Vertical dashed line
-xline(eta_opt, '--', 'LineWidth', 2, 'Color', colorvec(1,:));
-xline(etaopt1, '--', 'LineWidth', 2,'Color', colorvec(2,:));
-xline(etaopt2, '--', 'LineWidth', 2,'Color', colorvec(3,:));
+%xline(eta_opt, '--', 'LineWidth', 2, 'Color', [0.5 0.5 0.5]);
+%xline(etaopt1, '--', 'LineWidth', 2,'Color', [0.5 0.5 0.5]);
+%xline(etaopt2, '--', 'LineWidth', 2,'Color', [0.5 0.5 0.5]);
 
 % Marker at optimum
-plot(eta_opt, r_star, 'o', ...
-    'MarkerSize', 8, ...
-    'MarkerFaceColor', colorvec(1,:), ...
-    'MarkerEdgeColor', 'k');
-plot(etaopt1, Jopt1/N, 'o', ...
-    'MarkerSize', 8, ...
-    'MarkerFaceColor', colorvec(2,:), ...
-    'MarkerEdgeColor', 'k');
-plot(etaopt2, Jopt2/N, 'o', ...
-    'MarkerSize', 8, ...
-    'MarkerFaceColor', colorvec(3,:), ...
-    'MarkerEdgeColor', 'k');
+plot(eta_opt, r_star, 'o','MarkerSize',8,'MarkerFaceColor', colorvec(1,:),'MarkerEdgeColor', 'k');
+plot(etaopt1, Jopt1/N, 'o','MarkerSize',8,'MarkerFaceColor',colorvec(2,:),'MarkerEdgeColor', 'k');
+plot(etaopt2,Jopt2/N,'o','MarkerSize',8,'MarkerFaceColor',colorvec(3,:),'MarkerEdgeColor', 'k');
 % Labels
-xlabel('stepsize $\eta$', ...
-    'Interpreter', 'latex', ...
-    'FontSize', 15);
+xlabel('stepsize $\eta$','Interpreter','latex','FontSize', 15);
 
-ylabel('(-)', ...
-    'Interpreter', 'latex', ...
-    'FontSize', 15);
+ylabel('(-)','Interpreter','latex','FontSize',15);
 
 % Legend
-legend({ ...
-    '$r(\eta)$', ...
-    '$\hat{J}(\eta)$', ...
-    '$\tilde{J}(\tilde{\eta})$', ...
-    '$\eta_{opt}$', ...
-    '$\hat{\eta}^{\ast}$', ...
-    '$\tilde{\eta}^{\ast}$'}, ...
-    'Interpreter', 'latex', ...
-    'FontSize', 13, ...
-    'Location', 'northwest');
+legend({'$r(\eta)$','$\hat{J}(\eta)$','$\tilde{J}(\eta)$','$\sum\|\hat{\epsilon}_k\|_D$','$\sum\|\tilde{\epsilon}_k\|_D$'},'Interpreter', 'latex','FontSize',13,'Location','northwest');
 
 % Axes styling
-set(gca, ...
-    'FontSize', 13, ...
-    'LineWidth', 1.2);
+set(gca,'FontSize', 13,'LineWidth', 1.2);
 xlim([min(etavec), max(etavec)])
 ylim([0, 15])
+xlim([0.0, 0.99])
 fig = gcf;
 fig.Position = [100 100 600 250];
-%exportgraphics(gcf,'ExampleEtaOpt.pdf', ContentType='vector')
+%exportgraphics(gcf,'figures/ExampleEtaOpt.pdf', ContentType='vector')
 
 function [J, deltamax, etavec,etaopt,Jopt] = calcJ(N,theta,lambda_min,lambda_max)
     omegavec = linspace(-pi,pi,N);
@@ -103,7 +85,7 @@ function [J, deltamax, etavec,etaopt,Jopt] = calcJ(N,theta,lambda_min,lambda_max
             for lambdaid = 1:length(lambdavec)
                 lambda = lambdavec(lambdaid);
                 a = 1 - eta * lambda;
-                denomvec(lambdaid) = abs(exp(i*omega) - a)^2;
+                denomvec(lambdaid) = abs(exp(1i*omega) - a)^2;
             end
             J_eta = J_eta + norm(Delta(:,omegaid))^2 / min(denomvec);
         end
