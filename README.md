@@ -25,12 +25,33 @@ The repository provides all scripts required to reproduce the numerical example 
   <img src="WindTurbines/figures/turbinesSetup.png" alt="Two-tank system" width="800">
 </p>
 
+## Reproducing the numerical results
 
-## Reproducing the Results
+The numerical results presented in this work can be reproduced using the code provided in this repository. The results are divided into two examples:
 
-1. Run ...
-2. Execute ...
-3. Run ...
+1. **Illustrative example with a time-varying reference**
+2. **Wind farm control example**
+
+### 1. Illustrative example: Time-varying reference
+
+All files required to reproduce the illustrative example are located in the `IllustrativeExample/` folder.
+
+The following scripts can be used to reproduce the results:
+
+- **Run the OFO controller:** Execute `IllustrativeExample/OFOController/main` to run the online feedback optimization (OFO) controller with different step sizes.
+- **Calculate the optimal step size and the function \(J\):** Execute `IllustrativeExample/CalcStepsize` to calculate the optimal step size and evaluate the function \(J\) based on spectral information.
+- **Plot the results:** Execute `IllustrativeExample/plotErrors` to generate plots of the resulting tracking errors.
+
+### 2. Wind farm control example
+
+All files required to reproduce the wind farm control example are located in the `WindTurbines/` folder.
+
+The following scripts can be used to reproduce the results:
+
+- **Run the OFO controller:** Execute `WindTurbines/mainOFO` to run the OFO controller with different step sizes.
+- **Calculate the optimal step size and the function \(J\):** Execute `WindTurbines/calcStepsize` to calculate the optimal step size and evaluate the function \(J\) based on spectral information of the wind direction.
+- **Plot the tracking error:** Execute `WindTurbines/plotErrors` to visualize the resulting tracking error.
+- **Plot the wind direction:** Execute `WindTurbines/plotWind` to visualize the wind direction used in the wind farm control example.
 
 <!--
 ## Citation
